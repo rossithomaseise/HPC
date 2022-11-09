@@ -8,10 +8,16 @@
 
 #define VMIN 1
 #define VMAX 254
+#define N 27
+#define WHITE 255
 
-void initialisation(uint8**I, uint8**V, uint8**M,int nrh,int nch,int nrl,int ncl);
+#define MIN(a,b) (((a)<(b))?(a):(b))
+#define MAX(a,b) (((a)>(b))?(a):(b))
 
-void sigma_delta(uint8**It, uint8**Vt, uint8**M_t,uint8**V_t_1, uint8**M_t_1, int nrh,int nch,int nrl,int ncl);
+
+void initialisation(uint8**I, uint8**V, uint8**M,int nrl, int nrh, int ncl, int nch);
+
+uint8** sigma_delta(uint8**I_t, uint8**V_t, uint8**M_t,uint8**V_t_1, uint8**M_t_1, int nrl, int nrh, int ncl, int nch);
 
 
 
