@@ -8,5 +8,7 @@
 
 
 
+uint8** dilatation(uint8**E_t,int nrl, int nrh, int ncl, int nch);
 
+uint8** erosion(uint8**E_t,int nrl, int nrh, int ncl, int nch);
 #endif
