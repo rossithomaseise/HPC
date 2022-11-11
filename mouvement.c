@@ -1,23 +1,15 @@
-
 #include "mouvement.h"
 
-
 void initialisation(uint8**I, uint8**V, uint8**M,int nrl, int nrh, int ncl, int nch){
-
 	for(uint16_t i = nrl; i <=nrh; i++){
 		for(uint16_t j = ncl; j <=nch; j++){
 			M[i][j] = I[i][j];
 			V[i][j] = VMIN;
 		}
-
 	}
-
-
 }
 
 uint8** sigma_delta(uint8**I_t, uint8**V_t, uint8**M_t,uint8**V_t_1, uint8**M_t_1, int nrl, int nrh, int ncl, int nch){
-
-	//initialisation(I, V_t_1, M_t_1);
 
 	uint8** O_t = ui8matrix(nrl, nrh, ncl, nch);
 	uint8** E_t = ui8matrix(nrl, nrh, ncl, nch);
@@ -36,14 +28,12 @@ uint8** sigma_delta(uint8**I_t, uint8**V_t, uint8**M_t,uint8**V_t_1, uint8**M_t_
 				M_t[i][j] = M_t_1[i][j];
 		}
 	}
-
 	//Etape 2 Traitement des différences
 	for(uint16_t i = nrl; i <=nrh; i++){
 		for(uint16_t j = ncl; j <=nch; j++){
 			O_t[i][j] = abs(M_t[i][j] - I_t[i][j]);
 		}
 	}
-
 	//Etape 3 : mettre à jour et serrage
 	for(uint16_t i = nrl; i <=nrh; i++){
 		for(uint16_t j = ncl; j <=nch; j++){
@@ -53,9 +43,7 @@ uint8** sigma_delta(uint8**I_t, uint8**V_t, uint8**M_t,uint8**V_t_1, uint8**M_t_
 				V_t[i][j] = V_t_1[i][j] - 1;
 			else
 				V_t[i][j] = V_t_1[i][j];
-
 			V_t[i][j] = MAX(MIN(V_t[i][j],VMAX),VMIN);
-
 		}
 	}
 	//Etape 4 : Estimation de Et
@@ -68,8 +56,5 @@ uint8** sigma_delta(uint8**I_t, uint8**V_t, uint8**M_t,uint8**V_t_1, uint8**M_t_
 
 		}
 	}
-
 	return E_t;
-
-
 }
